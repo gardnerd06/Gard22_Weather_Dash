@@ -28,4 +28,11 @@ $("#getCity").click(function get(event) {
 
 function getCity() {
   console.log("you've searched for a city");
+  var cityname = $("#txt").val();
+  console.log(cityname);
+  let cc = "US";
+  let limit = "3";
+  let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
+  var requestUrl =
+    "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}";
 }
