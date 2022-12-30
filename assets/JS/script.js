@@ -26,13 +26,29 @@ $("#getCity").click(function get(event) {
   getCity();
 });
 
+$("#getWeather").click(function get(event) {
+  event.preventDefault();
+  getWeather();
+});
+
 function getCity() {
   console.log("you've searched for a city");
   var cityname = $("#txt").val();
   console.log(cityname);
   let cc = "US";
-  let limit = "3";
+  let state = $("#txt1").val();
+  let limit = "1";
   let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
-  var requestUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}";
+  var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityname},${state},${cc}&limit=${limit}&appid=${key}`;
+  fetch(requestUrl)
+    .then((Response) => {
+      return Response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
+
+function getWeather() {
+  console.log("you're searching for weather");
 }

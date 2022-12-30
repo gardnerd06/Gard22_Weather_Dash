@@ -30,11 +30,44 @@
 
         <form class="d-flex" role="search">
           <input
+            id="latitude"
+            class="form-control me-2"
+            inputmode="numeric"
+            type="text"
+            placeholder="Latitude"
+            aria-label="Latitude"
+            readonly
+          />
+          <input
+            id="longitude"
+            class="form-control me-2"
+            inputmode="numeric"
+            type="text"
+            placeholder="Longitude"
+            aria-label="Longitude"
+            readonly
+          />
+          <button id="getWeather" class="btn btn-outline-success" type="submit">
+            Weather
+          </button>
+        </form>
+
+        <form class="d-flex" role="search">
+          <input
             id="txt"
             class="form-control me-2"
-            type="search"
+            type="text"
             placeholder="City Name"
             aria-label="Search"
+            required
+          />
+          <input
+            id="txt1"
+            class="form-control me-2"
+            type="text"
+            placeholder="State"
+            aria-label="Search"
+            required
           />
           <button id="getCity" class="btn btn-outline-success" type="submit">
             Search
@@ -44,23 +77,35 @@
     </nav>
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
-        </p>
+        <h5 class="card-title">Location Name</h5>
+        <p class="card-text">High Temp, Low Temp</p>
+        <p class="card-text">Feels like</p>
+        <p class="card-text">Pressure</p>
+        <p class="card-text">Humidity</p>
+        <p class="card-text">UV index</p>
+        <p class="card-text">Precipitation</p>
+        <p class="card-text">Dew Point</p>
+        <p class="card-text">Wind speed and direction</p>
+        <p class="card-text">Sunrise</p>
+        <p class="card-text">Sunset</p>
         <p class="card-text">
           <small class="text-muted">Last updated 3 mins ago</small>
         </p>
       </div>
-      <img src="" class="card-img-bottom" alt="" />
+      <img
+        src=" http://openweathermap.org/img/wn/11d@4x.png"
+        alt="Weather info"
+        width="100"
+        height="100"
+        class="d-inline-block align-text-top"
+      />
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col">
         <div class="card h-100">
           <img src="" class="card-img-top" alt="" />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title"></h5>
             <p class="card-text">
               This is a wider card with supporting text below as a natural
               lead-in to additional content. This content is a little bit
