@@ -1,7 +1,3 @@
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-
-// Create a Dashboard with form inputs
-
 // search by city and return current and future conditions (5-day)
 
 //  Weather results persist in History
@@ -35,9 +31,7 @@ $("#getWeather").click(function get(event) {
 });
 
 function getCity() {
-  console.log("you've searched for a city");
   var cityname = $("#txt").val();
-  console.log(cityname);
   let cc = "US";
   let state = $("#txt1").val();
   let limit = "1";
@@ -52,7 +46,6 @@ function getCity() {
       }
     })
     .then((data) => {
-      console.log(Object.keys(data));
       const values = Object.values(data[0]);
       var latitude = values[2];
       var longitude = values[3];
@@ -62,11 +55,10 @@ function getCity() {
       if (confirm(`You are searching for \n ${city} , ${state}?`) === true) {
         $("#latitude").val(latitude);
         $("#longitude").val(longitude);
+        getWeather();
       } else {
         alert("You must specify both City and State!");
       }
-
-      console.log(values);
     });
 }
 
