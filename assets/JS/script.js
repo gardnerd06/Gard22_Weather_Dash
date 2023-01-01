@@ -2,8 +2,7 @@
 
 //  Weather results persist in History
 
-// Results should be city name, date, icon that represents
-//  current weather, the temperature, humidity and wind speed
+// Results should be
 
 // results should include a 5-day forcast
 
@@ -66,7 +65,7 @@ function getWeather() {
   var lat = $("#latitude").val();
   var lon = $("#longitude").val();
   let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
-  var weatherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`;
+  var weatherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
   console.log("you're searching for weather");
 
   fetch(weatherURL)
@@ -77,7 +76,48 @@ function getWeather() {
         throw new Error("Something went wrong on the API server!");
       }
     })
-    .then((data) => {
-      console.log(data);
+    .then((info) => {
+      console.log(info);
+
+      var city = info.city.name;
+      // var icon = info.list[0].weather[0].icon;
+      var weatherNow = info.list[0].weather[0].main;
+      var currtemp = info.list[0].main.temp;
+      var tempHi = info.list[0].main.temp_max;
+      var tempLow = info.list[0].main.temp_min;
+      var humidity = info.list[0].main.humidity;
+      var windSpeed = info.list[0].wind.speed;
+      // var precip = "";
+      // var sunrise = "";
+      // var sunset = "";
+      var weatherCard = `<div class="card-body">
+      <h5 class="card-title">${city}</h5>
+      <p  class="card-text">${current}</p>
+      <p  class="card-text">FORECAST:  ${weatherNow}</p>
+      <p  class="card-text">CURR TEMP:  ${currtemp} f</p>
+      <p  class="card-text">TODAY'S HIGH:  ${tempHi}</p>
+      <p  class="card-text">TODAY'S LOW:  ${tempLow}</p>
+      <p id ='humidity' class="card-text">HUMIDITY:${humidity}</p>
+      <p id ='precip' class="card-text">  ${windSpeed} MPH</p>
+      <p id ='sunrise' class="card-text"></p>
+      <p id ='Sunset' class="card-text"></p>
+      <p class="card-text">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </p>
+      </div>
+      <img
+      src="http://openweathermap.org/img/wn/11d@4x.png"
+      alt="Weather info"
+      width="100"
+      height="100"
+      class="d-inline-block align-text-top"
+      />`;
+      // console.log(icon);
+      // $("#weatherMain");
+      // $("#weatherMain").text();
+      $("#weatherMain").append(weatherCard);
     });
+  //
 }
+// city name, date, icon that represents
+//   current weather, the temperature, humidity and wind speed
