@@ -28,6 +28,9 @@ $("#getCity").click(function get(event) {
 
 $("#getWeather").click(function get(event) {
   event.preventDefault();
+  if ($("#latitude").val() == "") {
+    alert("You must search for a city!");
+  }
   getWeather();
 });
 
@@ -41,14 +44,48 @@ function getCity() {
   let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
   var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityname},${state},${cc}&limit=${limit}&appid=${key}`;
   fetch(requestUrl)
-    .then((Response) => {
-      return Response.json();
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error("Something went wrong on API server!");
+      }
     })
     .then((data) => {
-      console.log(data);
+      console.log(Object.keys(data));
+      const values = Object.values(data[0]);
+      var latitude = values[2];
+      var longitude = values[3];
+      var city = values[0];
+      var state = values[5];
+
+      if (confirm(`You are searching for \n ${city} , ${state}?`) === true) {
+        $("#latitude").val(latitude);
+        $("#longitude").val(longitude);
+      } else {
+        alert("You must specify both City and State!");
+      }
+
+      console.log(values);
     });
 }
 
 function getWeather() {
+  var lat = $("#latitude").val();
+  var lon = $("#longitude").val();
+  let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
+  var weatherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`;
   console.log("you're searching for weather");
+
+  fetch(weatherURL)
+    .then((weather) => {
+      if (weather.status === 200) {
+        return weather.json();
+      } else {
+        throw new Error("Something went wrong on the API server!");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    });
 }
