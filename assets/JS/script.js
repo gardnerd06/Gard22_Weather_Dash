@@ -80,7 +80,7 @@ function getWeather() {
       console.log(info);
 
       var city = info.city.name;
-      // var icon = info.list[0].weather[0].icon;
+      var icon = info.list[0].weather[0].icon;
       var weatherNow = info.list[0].weather[0].main;
       var currtemp = info.list[0].main.temp;
       var tempHi = info.list[0].main.temp_max;
@@ -88,9 +88,20 @@ function getWeather() {
       var humidity = info.list[0].main.humidity;
       var windSpeed = info.list[0].wind.speed;
       // var precip = "";
-      // var sunrise = "";
+      var sunrise = dayjs(info.city.sunrise);
+      console.log(sunrise);
+
       // var sunset = "";
-      var weatherCard = `<div class="card-body">
+      var weatherCard = `<div class="col">
+      <div class="card h-100">
+      <img
+      src="http://openweathermap.org/img/wn/${icon}@4x.png"
+      alt="Weather info"
+      width="100"
+      height="100"
+      class="d-inline-block align-text-top"
+      />
+      <div class="card-body">
       <h5 class="card-title">${city}</h5>
       <p  class="card-text">${current}</p>
       <p  class="card-text">FORECAST:  ${weatherNow}</p>
@@ -105,13 +116,7 @@ function getWeather() {
         <small class="text-muted">Last updated 3 mins ago</small>
       </p>
       </div>
-      <img
-      src="http://openweathermap.org/img/wn/11d@4x.png"
-      alt="Weather info"
-      width="100"
-      height="100"
-      class="d-inline-block align-text-top"
-      />`;
+      `;
       // console.log(icon);
       // $("#weatherMain");
       // $("#weatherMain").text();
