@@ -8,7 +8,7 @@
 
 // When I click a city from the history then you are
 // shown current and future conditions for that city.
-var current = dayjs();
+var current = dayjs().format("dddd, MMMM D, YYYY h:mm A");
 
 $(function currentTime() {
   var now = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
@@ -78,21 +78,25 @@ function getWeather() {
     })
     .then((info) => {
       console.log(info);
+      var days = info.list;
 
-      var city = info.city.name;
-      var icon = info.list[0].weather[0].icon;
-      var weatherNow = info.list[0].weather[0].main;
-      var currtemp = info.list[0].main.temp;
-      var tempHi = info.list[0].main.temp_max;
-      var tempLow = info.list[0].main.temp_min;
-      var humidity = info.list[0].main.humidity;
-      var windSpeed = info.list[0].wind.speed;
-      // var precip = "";
-      var sunrise = dayjs(info.city.sunrise);
-      console.log(sunrise);
+      for (var i = 0; i < 5; i++) {
+        var city = info.city.name;
+        var icon = info.list[i].weather[0].icon;
+        var weatherNow = info.list[i].weather[0].main;
+        var currtemp = info.list[i].main.temp;
+        var tempHi = info.list[i].main.temp_max;
+        var tempLow = info.list[i].main.temp_min;
+        var humidity = info.list[i].main.humidity;
+        var windSpeed = info.list[i].wind.speed;
+        // var precip = "";
+        var sunrise = dayjs(info.city.sunrise * 1000).format("h-mm-A");
+        console.log(sunrise);
 
-      // var sunset = "";
-      var weatherCard = `<div class="col">
+        var sunset = dayjs(info.city.sunset * 1000).format("h-mm-A");
+        console.log(sunset);
+
+        var weatherCard = `<div class="col">
       <div class="card h-100">
       <img
       src="http://openweathermap.org/img/wn/${icon}@4x.png"
@@ -104,23 +108,21 @@ function getWeather() {
       <div class="card-body">
       <h5 class="card-title">${city}</h5>
       <p  class="card-text">${current}</p>
-      <p  class="card-text">FORECAST:  ${weatherNow}</p>
-      <p  class="card-text">CURR TEMP:  ${currtemp} f</p>
-      <p  class="card-text">TODAY'S HIGH:  ${tempHi}</p>
-      <p  class="card-text">TODAY'S LOW:  ${tempLow}</p>
-      <p id ='humidity' class="card-text">HUMIDITY:${humidity}</p>
-      <p id ='precip' class="card-text">  ${windSpeed} MPH</p>
-      <p id ='sunrise' class="card-text"></p>
-      <p id ='Sunset' class="card-text"></p>
+      <p  class="card-text">Forecast:  ${weatherNow}</p>
+      <p  class="card-text">Curr Temp:  ${currtemp} f</p>
+      <p  class="card-text">Today's High:  ${tempHi}</p>
+      <p  class="card-text">Today's Low:  ${tempLow}</p>
+      <p id ='humidity' class="card-text">Humidity:${humidity}</p>
+      <p id ='precip' class="card-text">WindSpeed:  ${windSpeed} MPH</p>
+      <p id ='sunrise' class="card-text">SunRise: ${sunrise}</p>
+      <p id ='Sunset' class="card-text">SunSet: ${sunset}</p>
       <p class="card-text">
         <small class="text-muted">Last updated 3 mins ago</small>
       </p>
       </div>
       `;
-      // console.log(icon);
-      // $("#weatherMain");
-      // $("#weatherMain").text();
-      $("#weatherMain").append(weatherCard);
+        $("#weatherMain").append(weatherCard);
+      }
     });
   //
 }
