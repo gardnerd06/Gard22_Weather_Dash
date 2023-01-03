@@ -82,8 +82,8 @@ function getWeather() {
       console.log(today);
       var now = dayjs(today.dt * 1000).format("dddd, MMMM D, YYYY h:mm A");
       var weathericon = today.weather[0].icon;
-      var sunrise = dayjs(today.sys.sunrise * 1000).format("h-mm-A");
-      var sunset = dayjs(today.sys.sunset * 1000).format("h-mm-A");
+      var sunrise = dayjs(today.sys.sunrise * 1000).format("h:mm-A");
+      var sunset = dayjs(today.sys.sunset * 1000).format("h:mm-A");
       var windSpeed = today.wind.speed;
       var mainWeather = today.weather[0].main;
       var humidity = today.main.humidity;
@@ -94,30 +94,33 @@ function getWeather() {
 
       var todayForecast = `<div class="col">
       <div class="card h-100">
-      <img
-      src="http://openweathermap.org/img/wn/${weathericon}@4x.png"
-      alt="Weather info"
-      width="100"
-      height="100"
-      class="d-inline-block align-text-top"
-      />
+        <img
+          src="http://openweathermap.org/img/wn/${weathericon}@4x.png"
+          alt="Weather info"
+          width="100"
+          height="100"
+          class="d-inline-block align-text-top"
+        />
+      </div>
       <div class="card-body">
-      <h5 class="card-title">${here}</h5>
-      <p  class="card-text">${now}</p>
-      <p  class="card-text">Forecast:  ${mainWeather}</p>
-      <p  class="card-text">Temp:  ${mainTemp} f</p>
-      <p  class="card-text">Temp High:  ${tempHi}</p>
-       <p  class="card-text">Temp Low:  ${tempLow}</p>
-       <p id ='humidity' class="card-text">Humidity:${humidity}%</p>
-       <p id ='precip' class="card-text">WindSpeed:  ${windSpeed} MPH</p>
-       <p id ='sunrise' class="card-text">SunRise: ${sunrise}</p>
-       <p id ='Sunset' class="card-text">SunSet: ${sunset}</p>
-       <p class="card-text">
-         <small class="text-muted">Last updated 3 mins ago</small>
-       </p>
-       </div>
+        <h5 class="card-title">${here}</h5>
+        <p class="card-text">${now}</p>
+        <p class="card-text">Forecast: ${mainWeather}</p>
+        <p class="card-text">Temp: ${mainTemp} f</p>
+        <p class="card-text">Temp High: ${tempHi}</p>
+        <p class="card-text">Temp Low: ${tempLow}</p>
+        <p id="humidity" class="card-text">Humidity:${humidity}%</p>
+        <p id="precip" class="card-text">WindSpeed: ${windSpeed} MPH</p>
+        <p id="sunrise" class="card-text">SunRise: ${sunrise}</p>
+        <p id="Sunset" class="card-text">SunSet: ${sunset}</p>
+      </div>
+    </div>
+    
       `;
       $("#weatherMain").prepend(todayForecast);
+
+      var savedCity = todayForecast;
+      localStorage.setItem("where", savedCity);
     });
 
   fetch(weatherURL)
@@ -139,28 +142,45 @@ function getWeather() {
         var icon = info.list[i].weather[0].icon;
         var weatherNow = info.list[i].weather[0].main;
         var currtemp = info.list[i].main.temp;
-        // var precip = "";
+        var humidity1 = info.list[i].main.humidity;
+        var windSpeed1 = info.list[i].wind.speed;
         var weatherCard = `<div class="col">
-      <div class="card h-100">
-      <img
-      src="http://openweathermap.org/img/wn/${icon}@4x.png"
-      alt="Weather info"
-      width="100"
-      height="100"
-      class="d-inline-block align-text-top"
-      />
-      <div class="card-body">
-      <h5 class="card-title">${city}</h5>
-      <p  class="card-text">${time}</p>
-      <p  class="card-text">Forecast:  ${weatherNow}</p>
-      <p  class="card-text">Temp:  ${currtemp} f</p>
-      
-      `;
+        <div class="card-header h-100">
+          <img
+            src="http://openweathermap.org/img/wn/${icon}@4x.png"
+            alt="Weather info"
+            width="100"
+            height="100"
+            class="d-inline-block align-text-top"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">${city}</h5>
+          <p class="card-text">${time}</p>
+          <p class="card-text">Forecast: ${weatherNow}</p>
+          <p class="card-text">Temp: ${currtemp} f</p>
+          <p id="humidity" class="card-text">Humidity:${humidity1}%</p>
+          <p id="precip" class="card-text">WindSpeed: ${windSpeed1} MPH</p>
+        </div>
+      </div>`;
 
-        $("#weatherMain").append(weatherCard);
+        $("#forecast").append(weatherCard);
+
+        var forecast5 = weatherCard;
+        localStorage.setItem("future", forecast5);
       }
     });
 }
 // city name, date, icon that represents
 //   current weather, the temperature, humidity and wind speed
 // {/*  */}
+$(function persist() {
+  var keep = localStorage.getItem("where");
+  var get5 = localStorage.getItem("future");
+  $("#weatherMain").prepend(keep);
+  $("#forecast").append(get5);
+});
+$(function gethistory() {
+  var hist = localStorage.getItem("where");
+  $("#history").append(hist);
+});

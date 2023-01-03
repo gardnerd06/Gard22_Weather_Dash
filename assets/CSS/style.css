@@ -6,3 +6,8 @@ body {
   margin: 5px;
   padding: 10px;
 }
+
+#forecast {
+  overflow-y: scroll;
+  height: 395px;
+}
