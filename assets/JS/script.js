@@ -93,7 +93,7 @@ function getWeather() {
       var mainTemp = today.main.temp;
 
       var todayForecast = `<div class="col">
-      <div class="card h-100">
+      <div class="card">
         <img
           src="http://openweathermap.org/img/wn/${weathericon}@4x.png"
           alt="Weather info"
@@ -114,13 +114,12 @@ function getWeather() {
         <p id="sunrise" class="card-text">SunRise: ${sunrise}</p>
         <p id="Sunset" class="card-text">SunSet: ${sunset}</p>
       </div>
-    </div>
-    
-      `;
+    </div>`;
       $("#weatherMain").prepend(todayForecast);
 
-      var savedCity = todayForecast;
+      var savedCity = here;
       localStorage.setItem("where", savedCity);
+      localStorage.setItem("hist", todayForecast);
     });
 
   fetch(weatherURL)
@@ -145,7 +144,7 @@ function getWeather() {
         var humidity1 = info.list[i].main.humidity;
         var windSpeed1 = info.list[i].wind.speed;
         var weatherCard = `<div class="col">
-        <div class="card-header h-100">
+        <div class="card-header">
           <img
             src="http://openweathermap.org/img/wn/${icon}@4x.png"
             alt="Weather info"
@@ -166,8 +165,8 @@ function getWeather() {
 
         $("#forecast").append(weatherCard);
 
-        var forecast5 = weatherCard;
-        localStorage.setItem("future", forecast5);
+        localStorage.setItem("oldcity", city);
+        localStorage.setItem("get5", weatherCard);
       }
     });
 }
@@ -175,12 +174,20 @@ function getWeather() {
 //   current weather, the temperature, humidity and wind speed
 // {/*  */}
 $(function persist() {
-  var keep = localStorage.getItem("where");
-  var get5 = localStorage.getItem("future");
-  $("#weatherMain").prepend(keep);
-  $("#forecast").append(get5);
+  var keep = localStorage.getItem("get5");
+  var get1 = localStorage.getItem("hist");
+  $("#weatherMain").append(get1);
+  $("#forecast").append(keep);
 });
 $(function gethistory() {
-  var hist = localStorage.getItem("where");
+  var hist = localStorage.getItem("oldcity");
   $("#history").append(hist);
+});
+
+$("#history").click(function get(event) {
+  event.preventDefault();
+  console.log("you are trying to search for a city in history");
+  var oldspot = localStorage.getItem("oldcity");
+  $("#txt").val(oldspot);
+  getCity();
 });
