@@ -191,3 +191,12 @@ $("#history").click(function get(event) {
   $("#txt").val(oldspot);
   getCity();
 });
+
+$("#clear").click(function get(event) {
+  event.preventDefault();
+  console.log("you are trying to clear the page");
+
+  $("#weatherMain").text("");
+  $("#forecast").text("");
+  $("#history").text("");
+});
