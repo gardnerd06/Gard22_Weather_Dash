@@ -1,13 +1,3 @@
-// search by city and return current and future conditions (5-day)
-
-//  Weather results persist in History
-
-// Results should be
-
-// results should include a 5-day forcast
-
-// When I click a city from the history then you are
-// shown current and future conditions for that city.
 var current = dayjs().format("dddd, MMMM D, YYYY h:mm A");
 
 $(function currentTime() {
@@ -168,6 +158,8 @@ function getWeather() {
         localStorage.setItem("oldcity", city);
         localStorage.setItem("get5", weatherCard);
       }
+      var hist = localStorage.getItem("oldcity");
+      $("#history").append(hist);
     });
 }
 // city name, date, icon that represents
