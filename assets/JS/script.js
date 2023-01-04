@@ -199,4 +199,8 @@ $("#clear").click(function get(event) {
   $("#weatherMain").text("");
   $("#forecast").text("");
   $("#history").text("");
+  $("#longitude").val("");
+  $("#latitude").val("");
+  $("#txt").val("");
+  $("#txt").val("");
 });
