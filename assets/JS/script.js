@@ -1,4 +1,5 @@
 var current = dayjs().format("dddd, MMMM D, YYYY h:mm A");
+const cities = [];
 
 $(function currentTime() {
   var now = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
@@ -8,6 +9,8 @@ $(function currentTime() {
 
 $("#getCity").click(function get(event) {
   event.preventDefault();
+  $("#weatherMain").text("");
+  $("#forecast").text("");
   getCity();
 });
 
@@ -110,6 +113,10 @@ function getWeather() {
       var savedCity = here;
       localStorage.setItem("where", savedCity);
       localStorage.setItem("hist", todayForecast);
+
+      var places = cities.push();
+      console.log(places);
+      localStorage.places = JSON.stringify(places);
     });
 
   fetch(weatherURL)
@@ -159,7 +166,8 @@ function getWeather() {
         localStorage.setItem("get5", weatherCard);
       }
       var hist = localStorage.getItem("oldcity");
-      $("#history").append(hist);
+      var outline1 = `<button type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
+      $("#history").append(outline1);
     });
 }
 // city name, date, icon that represents
@@ -173,12 +181,14 @@ $(function persist() {
 });
 $(function gethistory() {
   var hist = localStorage.getItem("oldcity");
-  $("#history").append(hist);
+  var outline = `<button type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
+  $("#history").append(outline);
 });
 
 $("#history").click(function get(event) {
   event.preventDefault();
   console.log("you are trying to search for a city in history");
+
   var oldspot = localStorage.getItem("oldcity");
   $("#txt").val(oldspot);
   getCity();

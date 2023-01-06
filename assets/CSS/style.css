@@ -11,3 +11,14 @@ body {
   overflow-y: scroll;
   height: 395px;
 }
+
+#history {
+  max-width: 10rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#main {
+  margin-bottom: 55px;
+}
