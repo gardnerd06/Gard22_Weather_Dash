@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- added reset and style sheets to make the page dynamic in every browser -->
     <link rel="stylesheet" href="./assets/CSS/reset.css" />
     <link rel="stylesheet" href="./assets/CSS/style.css" />
     <link
@@ -14,6 +15,7 @@
     />
     <title>Weather Dashboard</title>
   </head>
+  <!-- added bootrap framework to have a place to dynamically add cards and info to the page -->
   <body>
     <nav id="main" class="navbar bg-body-tertiary">
       <div class="container-fluid">
@@ -27,7 +29,7 @@
         <p id="currentDay" class="navbar-brand"></p>
 
         <a class="navbar-brand" href="">Weather APP</a>
-
+        <!-- added forms to handle longitude and latitude inputs from the geolocator app -->
         <form class="d-flex" role="search">
           <input
             id="latitude"
@@ -69,6 +71,7 @@
             aria-label="Search"
             required
           />
+          <!-- added buttons and styling options to separate the page neatly -->
           <button id="getCity" class="btn btn-outline-success" type="submit">
             Search
           </button>
@@ -113,7 +116,7 @@
       class="row card bg-light mb-3"
       style="max-width: 10rem"
     ></div>
-
+    <!-- script files added for using different types of Js -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
       integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"

@@ -1,12 +1,13 @@
+// globally declared variables
 var current = dayjs().format("dddd, MMMM D, YYYY h:mm A");
 const cities = [];
-
+// added time function to display a ticking clock
 $(function currentTime() {
   var now = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
   window.setInterval(currentTime);
   $("#currentDay").text(now);
 });
-
+// created a click listener to call functions when clicking buttons
 $("#getCity").click(function get(event) {
   event.preventDefault();
   $("#weatherMain").text("");
@@ -21,7 +22,7 @@ $("#getWeather").click(function get(event) {
   }
   getWeather();
 });
-
+// created a function to take the city and state named and find the longitude and latitude locations for the second api call
 function getCity() {
   var cityname = $("#txt").val();
   let cc = "US";
@@ -53,16 +54,14 @@ function getCity() {
       }
     });
 }
-
+// created a function to take the longitude and latitude inputs and get the current weather for a city
 function getWeather() {
   var lat = $("#latitude").val();
   var lon = $("#longitude").val();
-  var count = "";
   let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
   var weatherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
-  console.log("you're searching for weather");
   var currentWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
-
+  // used fetch to parse through data and dynamically create cards storing this returned data
   fetch(currentWeather)
     .then((todayWeather) => {
       if (todayWeather.status === 200) {
@@ -72,7 +71,6 @@ function getWeather() {
       }
     })
     .then((today) => {
-      console.log(today);
       var now = dayjs(today.dt * 1000).format("dddd, MMMM D, YYYY h:mm A");
       var weathericon = today.weather[0].icon;
       var sunrise = dayjs(today.sys.sunrise * 1000).format("h:mm-A");
@@ -84,7 +82,7 @@ function getWeather() {
       var tempLow = today.main.temp_min;
       var here = today.name;
       var mainTemp = today.main.temp;
-
+      // used variables to hold cards and dynamically create different cards from returned data
       var todayForecast = `<div class="col">
       <div class="card">
         <img
@@ -161,81 +159,40 @@ function getWeather() {
       </div>`;
 
         $("#forecast").append(weatherCard);
-
+        // locally stored returned data in local storage in order to create a search history and to allow data to persist
         localStorage.setItem("oldcity", city);
         localStorage.setItem("get5", weatherCard);
       }
       var hist = localStorage.getItem("oldcity");
-      var outline1 = `<button id="${hist}" type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
+      var outline1 = `<button id="${hist}" onClick="GFG_click(this.id)" type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
       $("#history").append(outline1);
     });
 }
-// city name, date, icon that represents
-//   current weather, the temperature, humidity and wind speed
-// {/*  */}
+
 $(function persist() {
   var keep = localStorage.getItem("get5");
   var get1 = localStorage.getItem("hist");
-  var getHis = localStorage.getItem("history");
-  console.log(getHis);
-
-  // $.each(getHis, function (index, value) {
-  //   $("#history").append(index + value);
-  // });
   $("#weatherMain").append(get1);
   $("#forecast").append(keep);
 });
+// created functions to persist history
 $(function gethistory() {
-  var hist = localStorage.getItem("oldcity");
-  var outline = `<button id="${hist}" type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
-  $("#history").append(outline);
+  var hist = localStorage.getItem("history");
+  var result = JSON.parse(hist);
+  $.each(result, function (index, value) {
+    var outline = `<button id="${value}" onClick="GFG_click(this.id)" type="button" class="btn btn-outline-success btn-lg">${value}</button>`;
+    $("#history").append(outline);
+  });
 });
-
-$("#1").click(function get(event) {
-  event.preventDefault();
-  console.log("you are trying to search for a city in history");
-
-  var oldspot = localStorage.getItem("oldcity");
-  $("#txt").val(oldspot);
+// created a function to listen for clicks on searched buttons and grab the id
+function GFG_click(clicked) {
+  console.log(clicked);
+  $("#txt").val(clicked);
   getCity();
-});
-
-$(this).click(function get(event) {
-  event.preventDefault();
-  console.log("you are trying to click on yourself!");
-  console.log(this);
-  var oldspot = localStorage.getItem("oldcity");
-  $("#txt").val(oldspot);
-  getCity();
-});
-// $("#3").click(function get(event) {
-//   event.preventDefault();
-//   console.log("you are trying to search for a city in history");
-
-//   var oldspot = localStorage.getItem("oldcity");
-//   $("#txt").val(oldspot);
-//   getCity();
-// });
-// $("#4").click(function get(event) {
-//   event.preventDefault();
-//   console.log("you are trying to search for a city in history");
-
-//   var oldspot = localStorage.getItem("oldcity");
-//   $("#txt").val(oldspot);
-//   getCity();
-// });
-// $("#5").click(function get(event) {
-//   event.preventDefault();
-//   console.log("you are trying to search for a city in history");
-
-//   var oldspot = localStorage.getItem("oldcity");
-//   $("#txt").val(oldspot);
-//   getCity();
-// });
-
+}
+// created a clear feature to clear the sheet
 $("#clear").click(function get(event) {
   event.preventDefault();
-  console.log("you are trying to clear the page");
 
   $("#weatherMain").text("");
   $("#forecast").text("");

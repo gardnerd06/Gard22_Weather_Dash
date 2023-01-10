@@ -1,25 +1,25 @@
 # Gard22_Weather_Dash
 
-<!-- A Weather Dashboard to allow users to checkout the weather in other cities!
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
-Use the 5 Day Weather Forecast to retrieve weather data for cities. The base URL should look like the following: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}. After registering for a new API key, you may need to wait up to 2 hours for that API key to activate.
-Hint: Using the 5 Day Weather Forecast API, you'll notice that you will need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
-You will use localStorage to store any persistent data. For more information on how to work with the OpenWeather API, refer to the Full-Stack Blog on how to use API keys.
+This is a Weather Dash board created by me using the openweatherAPI.
+This is dashboard was given to me in week 6 of my bootcamp. The Code for this project was created using bootstrap and the openweatherapi. I created the javascript code in order to allow users to request the weather for any city by simply inserting the city and state into the search bar.
 
-User Story
+#Description
 
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
+The current assignment was to work with the openweatherapi and geo locater api and use fetch calls to get back promises that we could use to dynamically display information that the user requests. I worked with Bootstrap and DayJS and Javascript in order to provide the functionality for this project. I added code to display the time, as well as dynamically create card to display the current and future weather. I also used local storage to save and persist data.
 
-Acceptance Criteria
+#Installation
 
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city -->
+Code for this program can be downloaded from: https://github.com/gardnerd06/Gard22_Weather_Dash
+
+Webpage for the deployed website: https://gardnerd06.github.io//
+
+#Screenshots
+
+#Credit
+This api was used to supply the neccesary code and information for my site.
+
+https://api.openweathermap.org/
+
+#License
+
+MIT LICENSE INCLUDED IN ROOT FILE.
