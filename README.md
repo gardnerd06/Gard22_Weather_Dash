@@ -14,6 +14,9 @@ Code for this program can be downloaded from: https://github.com/gardnerd06/Gard
 Webpage for the deployed website: https://gardnerd06.github.io//
 
 #Screenshots
+![Screenshot (17)](https://user-images.githubusercontent.com/115792714/211464838-c433fb60-a142-4a1d-a7d8-8f18f083cd13.png)
+![Screenshot (18)](https://user-images.githubusercontent.com/115792714/211464860-d03cce14-0912-4a41-b8d5-26d1615f86a2.png)
+![Screenshot (19)](https://user-images.githubusercontent.com/115792714/211464865-182e2cc3-0a18-440a-a72f-018b3b1bfa47.png)
 
 #Credit
 This api was used to supply the neccesary code and information for my site.
