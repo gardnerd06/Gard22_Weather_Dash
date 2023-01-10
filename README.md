@@ -11,7 +11,7 @@ The current assignment was to work with the openweatherapi and geo locater api a
 
 Code for this program can be downloaded from: https://github.com/gardnerd06/Gard22_Weather_Dash
 
-Webpage for the deployed website: https://gardnerd06.github.io//
+Webpage for the deployed website: https://gardnerd06.github.io/Gard22_Weather_Dash/
 
 #Screenshots
 
