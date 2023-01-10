@@ -114,9 +114,9 @@ function getWeather() {
       localStorage.setItem("where", savedCity);
       localStorage.setItem("hist", todayForecast);
 
-      var places = cities.push();
-      console.log(places);
-      localStorage.places = JSON.stringify(places);
+      var places = cities.push(here);
+      localStorage.setItem("history", places);
+      localStorage.history = JSON.stringify(cities);
     });
 
   fetch(weatherURL)
@@ -166,7 +166,7 @@ function getWeather() {
         localStorage.setItem("get5", weatherCard);
       }
       var hist = localStorage.getItem("oldcity");
-      var outline1 = `<button type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
+      var outline1 = `<button id="${hist}" type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
       $("#history").append(outline1);
     });
 }
@@ -176,16 +176,22 @@ function getWeather() {
 $(function persist() {
   var keep = localStorage.getItem("get5");
   var get1 = localStorage.getItem("hist");
+  var getHis = localStorage.getItem("history");
+  console.log(getHis);
+
+  // $.each(getHis, function (index, value) {
+  //   $("#history").append(index + value);
+  // });
   $("#weatherMain").append(get1);
   $("#forecast").append(keep);
 });
 $(function gethistory() {
   var hist = localStorage.getItem("oldcity");
-  var outline = `<button type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
+  var outline = `<button id="${hist}" type="button" class="btn btn-outline-success btn-lg">${hist}</button>`;
   $("#history").append(outline);
 });
 
-$("#history").click(function get(event) {
+$("#1").click(function get(event) {
   event.preventDefault();
   console.log("you are trying to search for a city in history");
 
@@ -193,6 +199,39 @@ $("#history").click(function get(event) {
   $("#txt").val(oldspot);
   getCity();
 });
+
+$(this).click(function get(event) {
+  event.preventDefault();
+  console.log("you are trying to click on yourself!");
+  console.log(this);
+  var oldspot = localStorage.getItem("oldcity");
+  $("#txt").val(oldspot);
+  getCity();
+});
+// $("#3").click(function get(event) {
+//   event.preventDefault();
+//   console.log("you are trying to search for a city in history");
+
+//   var oldspot = localStorage.getItem("oldcity");
+//   $("#txt").val(oldspot);
+//   getCity();
+// });
+// $("#4").click(function get(event) {
+//   event.preventDefault();
+//   console.log("you are trying to search for a city in history");
+
+//   var oldspot = localStorage.getItem("oldcity");
+//   $("#txt").val(oldspot);
+//   getCity();
+// });
+// $("#5").click(function get(event) {
+//   event.preventDefault();
+//   console.log("you are trying to search for a city in history");
+
+//   var oldspot = localStorage.getItem("oldcity");
+//   $("#txt").val(oldspot);
+//   getCity();
+// });
 
 $("#clear").click(function get(event) {
   event.preventDefault();
