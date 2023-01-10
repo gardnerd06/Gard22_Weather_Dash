@@ -29,7 +29,7 @@ function getCity() {
   let state = $("#txt1").val();
   let limit = "1";
   let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
-  var requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityname},${state},${cc}&limit=${limit}&appid=${key}`;
+  var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityname},${state},${cc}&limit=${limit}&appid=${key}`;
   fetch(requestUrl)
     .then((response) => {
       if (response.status === 200) {
@@ -59,7 +59,7 @@ function getWeather() {
   var lat = $("#latitude").val();
   var lon = $("#longitude").val();
   let key = "d15a75a7f0fb2c83503cf38ba5a847c7";
-  var weatherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
+  var weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
   var currentWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
   // used fetch to parse through data and dynamically create cards storing this returned data
   fetch(currentWeather)
