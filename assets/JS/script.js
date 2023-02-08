@@ -4,7 +4,6 @@ const cities = [];
 // added time function to display a ticking clock
 $(function currentTime() {
   var now = dayjs().format("dddd, MMMM D, YYYY h:mm:ss A");
-  window.setInterval(currentTime);
   $("#currentDay").text(now);
 });
 // created a click listener to call functions when clicking buttons
